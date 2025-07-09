@@ -28,16 +28,6 @@ function App() {
           <Testimonials />
           <Contact />
           <Footer />
-
-          {/* <Navbar />
-          <HeroSection />
-          <AboutSection />
-          <MenuHighlights />
-          <GallerySection />
-          <Testimonials />
-          <Contact />
-          <Footer />
-          <ScrollToTop /> */}
         </>
       )}
     </div>
