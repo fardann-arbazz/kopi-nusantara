@@ -95,41 +95,6 @@ const SplashScreen = ({ onComplete }: { onComplete: () => void }) => {
               />
             </div>
           </motion.div>
-
-          {/* Subtle floating coffee beans decoration */}
-          {initialAnimComplete && (
-            <>
-              <motion.div
-                className="absolute top-1/4 left-1/4 text-amber-200/30 text-2xl"
-                initial={{ y: 0 }}
-                animate={{
-                  y: [0, -10, 0],
-                  transition: {
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  },
-                }}
-              >
-                {"☕"}
-              </motion.div>
-              <motion.div
-                className="absolute bottom-1/3 right-1/4 text-amber-200/30 text-2xl"
-                initial={{ y: 0 }}
-                animate={{
-                  y: [0, 10, 0],
-                  transition: {
-                    delay: 1,
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  },
-                }}
-              >
-                {"☕"}
-              </motion.div>
-            </>
-          )}
         </motion.div>
       )}
     </AnimatePresence>
