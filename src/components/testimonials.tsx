@@ -43,7 +43,7 @@ const testimonials = [
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(null);
+  const [direction, setDirection] = useState<"left" | "right" | null>(null);
 
   const nextTestimonial = () => {
     setDirection("right");
