@@ -13,6 +13,16 @@
   html { font-family: theme("fontFamily.sans"); }
 }
 
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;  
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  
+}
+
 /* Custom animations */
 .animate-float {
   animation: float 3s ease-in-out infinite;

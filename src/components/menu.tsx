@@ -158,20 +158,20 @@ const Menu = () => {
 
         {/* Category tabs with Indonesian design */}
         <motion.div
-          className="flex flex-col sm:flex-row justify-center mb-12 overflow-x-auto pb-2"
+          className="flex justify-center mb-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="relative">
-            {/* Scrollable category tabs with gradient fade */}
-            <div className="relative overflow-x-auto pb-2 hide-scrollbar">
+          <div className="relative w-full max-w-max">
+            {/* Scrollable container with hidden scrollbar */}
+            <div className="relative overflow-x-auto pb-4 scrollbar-hide">
               <div className="inline-flex space-x-2 px-4">
                 {menuItems.map((category, index) => (
                   <motion.button
                     key={index}
-                    className={`relative px-4 cursor-pointer py-2.5 rounded-full font-medium transition-all flex items-center whitespace-nowrap ${
+                    className={`relative px-4 py-2.5 rounded-full font-medium transition-all flex items-center whitespace-nowrap ${
                       activeCategory === index
                         ? "bg-amber-700 text-white shadow-lg"
                         : "bg-white text-amber-900 shadow-sm hover:bg-amber-50"
