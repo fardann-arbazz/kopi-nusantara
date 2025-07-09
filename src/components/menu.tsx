@@ -158,7 +158,7 @@ const Menu = () => {
 
         {/* Category tabs with Indonesian design */}
         <motion.div
-          className="flex justify-center mb-12 overflow-x-auto pb-2"
+          className="flex flex-col sm:flex-row justify-center mb-12 overflow-x-auto pb-2"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
@@ -171,7 +171,7 @@ const Menu = () => {
                 {menuItems.map((category, index) => (
                   <motion.button
                     key={index}
-                    className={`relative px-4 py-2.5 rounded-full font-medium transition-all flex items-center whitespace-nowrap ${
+                    className={`relative px-4 cursor-pointer py-2.5 rounded-full font-medium transition-all flex items-center whitespace-nowrap ${
                       activeCategory === index
                         ? "bg-amber-700 text-white shadow-lg"
                         : "bg-white text-amber-900 shadow-sm hover:bg-amber-50"

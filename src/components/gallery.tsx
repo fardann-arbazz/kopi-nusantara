@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { FiZoomIn, FiX } from "react-icons/fi";
 
 const galleryImages = [
   "https://i.pinimg.com/736x/1b/84/64/1b84649f65e96711c22e99182de6e52b.jpg",
@@ -14,7 +15,7 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
   return (
-    <section id="gallery" className="py-20 bg-coffee-light">
+    <section id="gallery" className="py-20 bg-amber-50">
       <div className="container mx-auto px-4">
         <motion.div
           className="text-center mb-16"
@@ -23,13 +24,16 @@ const Gallery = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-coffee-darker mb-4">
-            Gallery Kami
+          <h2 className="text-4xl font-bold text-amber-900 mb-4 font-[Poppins]">
+            Galeri Kami
           </h2>
-          <div className="w-20 h-1 bg-coffee-medium mx-auto mb-6"></div>
-          <p className="text-coffee-darker max-w-4xl mx-auto">
-            Ikuti perjalanan visual melalui kedai kopi kami dan lihat apa yang
-            membuat Kopi Nusantara istimewa.
+          <div className="flex justify-center mb-6">
+            <div className="w-16 h-1 bg-amber-700"></div>
+            <div className="w-16 h-1 bg-amber-500 mx-2"></div>
+            <div className="w-16 h-1 bg-amber-300"></div>
+          </div>
+          <p className="text-amber-900 max-w-4xl mx-auto text-lg">
+            Jelajahi suasana kafe kami melalui koleksi foto-foto istimewa.
           </p>
         </motion.div>
 
@@ -37,24 +41,41 @@ const Gallery = () => {
           {galleryImages.map((image, index) => (
             <motion.div
               key={index}
-              className="relative overflow-hidden rounded-lg cursor-pointer aspect-square"
+              className="relative group overflow-hidden rounded-xl aspect-square"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.03 }}
               onClick={() => setSelectedImage(index)}
             >
+              {/* Image with overlay */}
               <img
                 src={image}
-                alt={`Coffee ${index + 1}`}
-                className="w-full h-full object-cover"
+                alt={`Kopi Nusantara ${index + 1}`}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black/20 hover:bg-black/10 transition-colors"></div>
+
+              {/* Interactive overlay */}
+              <div className="absolute cursor-pointer inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                <motion.div
+                  className="text-white bg-amber-700/90 p-2 rounded-full"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <FiZoomIn className="w-5 h-5" />
+                </motion.div>
+              </div>
+
+              {/* Always-visible corner indicator */}
+              <div className="absolute top-2 right-2 text-white bg-black/30 rounded-full p-1.5 backdrop-blur-sm">
+                <FiZoomIn className="w-3 h-3" />
+              </div>
             </motion.div>
           ))}
         </div>
 
+        {/* Modal */}
         {selectedImage !== null && (
           <motion.div
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
@@ -65,23 +86,29 @@ const Gallery = () => {
           >
             <motion.div
               className="relative max-w-4xl w-full"
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
               <img
                 src={galleryImages[selectedImage]}
-                alt={`Selected Coffee ${selectedImage + 1}`}
-                className="w-full h-auto max-h-[90vh] object-contain"
+                alt={`Selected ${selectedImage + 1}`}
+                className="w-full h-auto max-h-[90vh] object-contain rounded-lg shadow-xl"
               />
+
               <button
-                className="absolute cursor-pointer top-4 right-4 text-white text-2xl bg-black/50 rounded-full w-10 h-10 flex items-center justify-center"
+                className="absolute -top-4 -right-4 text-white bg-amber-700 hover:bg-amber-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg transition-colors cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedImage(null);
                 }}
               >
-                &times;
+                <FiX className="w-5 h-5" />
               </button>
+
+              <div className="absolute bottom-4 left-0 right-0 text-center text-white text-sm opacity-80">
+                Klik di mana saja untuk menutup
+              </div>
             </motion.div>
           </motion.div>
         )}
